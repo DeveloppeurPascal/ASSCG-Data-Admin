@@ -375,8 +375,15 @@ begin
 end;
 
 function TASSCGDBStores.GetAsString: string;
+var
+  jsa: TJSONArray;
 begin
-  result := AsJSON.ToJSON;
+  jsa := AsJSON;
+  try
+    result := jsa.ToJSON;
+  finally
+    jsa.free;
+  end;
 end;
 
 procedure TASSCGDBStores.LoadFromFile(AFilename: string);
