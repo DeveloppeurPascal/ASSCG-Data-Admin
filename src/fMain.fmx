@@ -9,6 +9,7 @@ object frmMain: TfrmMain
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object AjaxBackground: TRectangle
@@ -19,83 +20,12 @@ object frmMain: TfrmMain
     Size.Height = 480.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
-  end
-  object Layout1: TLayout
-    Align = Center
-    Size.Width = 200.000000000000000000
-    Size.Height = 140.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 1
-    object btnOpenLocalDB: TButton
-      Align = Top
-      Margins.Left = 5.000000000000000000
-      Margins.Top = 5.000000000000000000
-      Margins.Right = 5.000000000000000000
-      Margins.Bottom = 5.000000000000000000
-      Position.X = 5.000000000000000000
-      Position.Y = 5.000000000000000000
-      Size.Width = 190.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 0
-      Text = 'Open local DB'
-      TextSettings.Trimming = None
-      OnClick = btnOpenLocalDBClick
-    end
-    object btnOpenWebSiteDB: TButton
-      Align = Top
-      Margins.Left = 5.000000000000000000
-      Margins.Top = 5.000000000000000000
-      Margins.Right = 5.000000000000000000
-      Margins.Bottom = 5.000000000000000000
-      Position.X = 5.000000000000000000
-      Position.Y = 37.000000000000000000
-      Size.Width = 190.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 3
-      Text = 'Open DB from the website'
-      TextSettings.Trimming = None
-      OnClick = btnOpenWebSiteDBClick
-    end
-    object btnQuitter: TButton
-      Align = Top
-      Cancel = True
-      Margins.Left = 5.000000000000000000
-      Margins.Top = 5.000000000000000000
-      Margins.Right = 5.000000000000000000
-      Margins.Bottom = 5.000000000000000000
-      Position.X = 5.000000000000000000
-      Position.Y = 101.000000000000000000
-      Size.Width = 190.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 2
-      Text = 'Quit'
-      TextSettings.Trimming = None
-      OnClick = btnQuitterClick
-    end
-    object btnAbout: TButton
-      Align = Top
-      Margins.Left = 5.000000000000000000
-      Margins.Top = 5.000000000000000000
-      Margins.Right = 5.000000000000000000
-      Margins.Bottom = 5.000000000000000000
-      Position.X = 5.000000000000000000
-      Position.Y = 69.000000000000000000
-      Size.Width = 190.000000000000000000
-      Size.Height = 22.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 1
-      Text = 'About'
-      TextSettings.Trimming = None
-      OnClick = btnAboutClick
-    end
+    Visible = False
   end
   object OlfAboutDialog1: TOlfAboutDialog
     Titre = 'Stores DB admin for App Stores Screen Captures Generator'
     VersionNumero = '1.0'
-    VersionDate = '20240117'
+    VersionDate = '20240118'
     MultiResBitmap = <
       item
       end>
@@ -104,7 +34,972 @@ object frmMain: TfrmMain
     URL = 'https://appstoresscreencapturesgenerator.olfsoftware.fr/'
     onURLClick = OlfAboutDialog1URLClick
     Langue = EN
-    Left = 568
-    Top = 176
+    Left = 104
+    Top = 8
+  end
+  object lHomeScreen: TLayout
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 430.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+    TabOrder = 1
+    object lBoutonsMenu: TLayout
+      Align = Center
+      Size.Width = 200.000000000000000000
+      Size.Height = 140.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object btnOpenLocalDB: TButton
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Open local DB'
+        TextSettings.Trimming = None
+        OnClick = btnOpenLocalDBClick
+      end
+      object btnOpenWebSiteDB: TButton
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 37.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Open DB from the website'
+        TextSettings.Trimming = None
+        OnClick = btnOpenWebSiteDBClick
+      end
+      object btnQuitter: TButton
+        Align = Top
+        Cancel = True
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 101.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Text = 'Quit'
+        TextSettings.Trimming = None
+        OnClick = btnQuitterClick
+      end
+      object btnAbout: TButton
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 69.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'About'
+        TextSettings.Trimming = None
+        OnClick = btnAboutClick
+      end
+    end
+  end
+  object lDevicesScreen: TLayout
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 430.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+    TabOrder = 3
+    object lDevicesLeft: TLayout
+      Align = Left
+      Size.Width = 300.000000000000000000
+      Size.Height = 430.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object lbDevices: TListBox
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 370.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        OnChange = lbDevicesChange
+        Viewport.Width = 286.000000000000000000
+        Viewport.Height = 366.000000000000000000
+      end
+      object GridPanelLayout2: TGridPanelLayout
+        Align = Bottom
+        Position.Y = 380.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        ColumnCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+        ControlCollection = <
+          item
+            Column = 0
+            Control = btnDeviceAdd
+            Row = 0
+          end>
+        RowCollection = <
+          item
+            Value = 100.000000000000000000
+          end>
+        object btnDeviceAdd: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 140.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Add a device'
+          TextSettings.Trimming = None
+          OnClick = btnDeviceAddClick
+        end
+      end
+    end
+    object lDevicesRight: TLayout
+      Align = Client
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 330.000000000000000000
+      Size.Height = 420.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object lblDeviceName: TLabel
+        Align = Top
+        FocusControl = edtDeviceName
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Device name'
+        TabOrder = 0
+      end
+      object edtDeviceName: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 1
+        Position.X = 5.000000000000000000
+        Position.Y = 32.000000000000000000
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object cbDeviceEnabled: TCheckBox
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'Enabled'
+      end
+      object GridPanelLayout5: TGridPanelLayout
+        Align = Top
+        Position.Y = 147.000000000000000000
+        Size.Width = 330.000000000000000000
+        Size.Height = 150.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        ColumnCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+        ControlCollection = <
+          item
+            Column = 0
+            Control = btnDeviceOk
+            Row = 0
+          end
+          item
+            Column = 1
+            Control = btnDeviceCancel
+            Row = 0
+          end
+          item
+            Column = 0
+            ColumnSpan = 2
+            Control = btnDeviceDelete
+            Row = 1
+          end
+          item
+            Column = 0
+            ColumnSpan = 2
+            Control = btnShowImageSizes
+            Row = 2
+          end>
+        RowCollection = <
+          item
+            Value = 33.625466708989040000
+          end
+          item
+            Value = 33.374530390265240000
+          end
+          item
+            Value = 33.000000000000000000
+          end>
+        object btnDeviceOk: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 155.000000000000000000
+          Size.Height = 40.438201904296880000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Ok'
+          TextSettings.Trimming = None
+          OnClick = btnDeviceOkClick
+        end
+        object btnDeviceCancel: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 155.000000000000000000
+          Size.Height = 40.438201904296880000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'Cancel'
+          TextSettings.Trimming = None
+          OnClick = btnDeviceCancelClick
+        end
+        object btnDeviceDelete: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 40.061798095703120000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Text = 'Delete'
+          TextSettings.Trimming = None
+          OnClick = btnDeviceDeleteClick
+        end
+        object btnShowImageSizes: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 39.500000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          Text = 'Edit image sizes'
+          TextSettings.Trimming = None
+          OnClick = btnShowImageSizesClick
+        end
+      end
+      object cbDeviceIsNeeded: TCheckBox
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 123.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Text = 'Is needed'
+      end
+      object gplDeviceImageType: TGridPanelLayout
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 93.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        ColumnCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+        ControlCollection = <
+          item
+            Column = 0
+            Control = rbDeviceImageTypeJPEG
+            Row = 0
+          end
+          item
+            Column = 1
+            Control = rbDeviceImageTypePNG
+            Row = 0
+          end>
+        RowCollection = <
+          item
+            Value = 100.000000000000000000
+          end>
+        object rbDeviceImageTypeJPEG: TRadioButton
+          Align = Center
+          GroupName = 'DeviceImageType'
+          Size.Width = 59.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'JPEG'
+        end
+        object rbDeviceImageTypePNG: TRadioButton
+          Align = Center
+          GroupName = 'DeviceImageType'
+          Size.Width = 54.000000000000000000
+          Size.Height = 19.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'PNG'
+        end
+      end
+    end
+  end
+  object lImageSizesScreen: TLayout
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 430.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    object lImageSizesLeft: TLayout
+      Align = Left
+      Size.Width = 300.000000000000000000
+      Size.Height = 430.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object lbImageSizes: TListBox
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 370.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        OnChange = lbImageSizesChange
+        Viewport.Width = 286.000000000000000000
+        Viewport.Height = 366.000000000000000000
+      end
+      object GridPanelLayout3: TGridPanelLayout
+        Align = Bottom
+        Position.Y = 380.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        ColumnCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+        ControlCollection = <
+          item
+            Column = 0
+            Control = btnImageSizeAdd
+            Row = 0
+          end>
+        RowCollection = <
+          item
+            Value = 100.000000000000000000
+          end>
+        object btnImageSizeAdd: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 140.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Add a size'
+          TextSettings.Trimming = None
+          OnClick = btnImageSizeAddClick
+        end
+      end
+    end
+    object lImageSizesRight: TLayout
+      Align = Client
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 330.000000000000000000
+      Size.Height = 420.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object cbImageSizeEnabled: TCheckBox
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 55.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = 'Enabled'
+      end
+      object GridPanelLayout4: TGridPanelLayout
+        Align = Top
+        Position.Y = 79.000000000000000000
+        Size.Width = 330.000000000000000000
+        Size.Height = 100.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        ColumnCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+        ControlCollection = <
+          item
+            Column = 0
+            Control = btnImageSizeOk
+            Row = 0
+          end
+          item
+            Column = 1
+            Control = btnImageSizeCancel
+            Row = 0
+          end
+          item
+            Column = 0
+            ColumnSpan = 2
+            Control = btnImageSizeDelete
+            Row = 1
+          end>
+        RowCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+        object btnImageSizeOk: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 155.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Ok'
+          TextSettings.Trimming = None
+          OnClick = btnImageSizeOkClick
+        end
+        object btnImageSizeCancel: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 155.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'Cancel'
+          TextSettings.Trimming = None
+          OnClick = btnImageSizeCancelClick
+        end
+        object btnImageSizeDelete: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Text = 'Delete'
+          TextSettings.Trimming = None
+          OnClick = btnImageSizeDeleteClick
+        end
+      end
+      object gplImageSizesWidthHeight: TGridPanelLayout
+        Align = Top
+        Size.Width = 330.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        ColumnCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+        ControlCollection = <
+          item
+            Column = 0
+            Control = edtImageSizeWidth
+            Row = 0
+          end
+          item
+            Column = 1
+            Control = edtImageSizeHeight
+            Row = 0
+          end>
+        RowCollection = <
+          item
+            Value = 100.000000000000000000
+          end>
+        object edtImageSizeWidth: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Center
+          TabOrder = 0
+          FilterChar = '0123456789'
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 80.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Width (px)'
+        end
+        object edtImageSizeHeight: TEdit
+          Touch.InteractiveGestures = [LongTap, DoubleTap]
+          Align = Center
+          TabOrder = 1
+          FilterChar = '0123456789'
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 80.000000000000000000
+          Size.Height = 22.000000000000000000
+          Size.PlatformDefault = False
+          TextPrompt = 'Height (px)'
+        end
+      end
+    end
+  end
+  object lStoresScreen: TLayout
+    Align = Client
+    Size.Width = 640.000000000000000000
+    Size.Height = 430.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+    TabOrder = 2
+    object tbStoresFooter: TToolBar
+      Align = Bottom
+      HitTest = False
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 385.000000000000000000
+      Size.Width = 630.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object btnCancel: TButton
+        Align = Right
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 545.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = '&Close'
+        TextSettings.Trimming = None
+        OnClick = btnCancelClick
+      end
+      object btnOk: TButton
+        Align = Right
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 435.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Text = '&Save and close'
+        TextSettings.Trimming = None
+        OnClick = btnOkClick
+      end
+      object btnExport: TButton
+        Align = Right
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 345.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 30.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'E&xport'
+        TextSettings.Trimming = None
+        OnClick = btnExportClick
+      end
+    end
+    object lStoresLeft: TLayout
+      Align = Left
+      Size.Width = 300.000000000000000000
+      Size.Height = 380.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object lbStores: TListBox
+        Align = Client
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 320.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        OnChange = lbStoresChange
+        Viewport.Width = 286.000000000000000000
+        Viewport.Height = 316.000000000000000000
+      end
+      object gplStores: TGridPanelLayout
+        Align = Bottom
+        Position.Y = 330.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        ColumnCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+        ControlCollection = <
+          item
+            Column = 0
+            Control = btnStoreAdd
+            Row = 0
+          end>
+        RowCollection = <
+          item
+            Value = 100.000000000000000000
+          end>
+        object btnStoreAdd: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 140.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Add a store'
+          TextSettings.Trimming = None
+          OnClick = btnStoreAddClick
+        end
+      end
+    end
+    object lStoresRight: TLayout
+      Align = Client
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 330.000000000000000000
+      Size.Height = 370.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object lblStoreName: TLabel
+        Align = Top
+        FocusControl = edtStoreName
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Store name'
+        TabOrder = 0
+      end
+      object edtStoreName: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 1
+        Position.X = 5.000000000000000000
+        Position.Y = 32.000000000000000000
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object cbStoreEnabled: TCheckBox
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Text = 'Enabled'
+      end
+      object GridPanelLayout1: TGridPanelLayout
+        Align = Top
+        Position.Y = 88.000000000000000000
+        Size.Width = 330.000000000000000000
+        Size.Height = 150.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        ColumnCollection = <
+          item
+            Value = 50.000000000000000000
+          end
+          item
+            Value = 50.000000000000000000
+          end>
+        ControlCollection = <
+          item
+            Column = 0
+            Control = btnStoreOk
+            Row = 0
+          end
+          item
+            Column = 1
+            Control = btnStoreCancel
+            Row = 0
+          end
+          item
+            Column = 0
+            ColumnSpan = 2
+            Control = btnStoreDelete
+            Row = 1
+          end
+          item
+            Column = 0
+            ColumnSpan = 2
+            Control = btnShowDevices
+            Row = 2
+          end>
+        RowCollection = <
+          item
+            Value = 33.625466708989040000
+          end
+          item
+            Value = 33.374530390265240000
+          end
+          item
+            Value = 33.000000000000000000
+          end>
+        object btnStoreOk: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 155.000000000000000000
+          Size.Height = 40.438201904296880000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Ok'
+          TextSettings.Trimming = None
+          OnClick = btnStoreOkClick
+        end
+        object btnStoreCancel: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 155.000000000000000000
+          Size.Height = 40.438201904296880000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          Text = 'Cancel'
+          TextSettings.Trimming = None
+          OnClick = btnStoreCancelClick
+        end
+        object btnStoreDelete: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 40.061798095703120000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          Text = 'Delete'
+          TextSettings.Trimming = None
+          OnClick = btnStoreDeleteClick
+        end
+        object btnShowDevices: TButton
+          Align = Client
+          Margins.Left = 5.000000000000000000
+          Margins.Top = 5.000000000000000000
+          Margins.Right = 5.000000000000000000
+          Margins.Bottom = 5.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 39.500000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          Text = 'Edit devices'
+          TextSettings.Trimming = None
+          OnClick = btnShowDevicesClick
+        end
+      end
+    end
+  end
+  object tbHeader: TToolBar
+    HitTest = False
+    Margins.Left = 5.000000000000000000
+    Margins.Top = 5.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+    Position.X = 5.000000000000000000
+    Position.Y = 5.000000000000000000
+    Size.Width = 630.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    object lblTitle: TLabel
+      Align = Client
+      StyledSettings = [Family, Size, FontColor]
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Size.Width = 400.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.Trimming = None
+      Text = 'lblTitle'
+      TabOrder = 0
+    end
+    object btnBackToStores: TButton
+      Align = Left
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 5.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'Back to stores'
+      TextSettings.Trimming = None
+      OnClick = btnBackToStoresClick
+    end
+    object btnBackToDevices: TButton
+      Align = Left
+      Margins.Left = 5.000000000000000000
+      Margins.Top = 5.000000000000000000
+      Margins.Right = 5.000000000000000000
+      Margins.Bottom = 5.000000000000000000
+      Position.X = 115.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 100.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Back to devices'
+      TextSettings.Trimming = None
+      OnClick = btnBackToDevicesClick
+    end
   end
 end
