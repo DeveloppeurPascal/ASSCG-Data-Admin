@@ -121,6 +121,8 @@ type
     procedure btnImageSizeDeleteClick(Sender: TObject);
     procedure btnBackToDevicesClick(Sender: TObject);
     procedure btnBackToStoresClick(Sender: TObject);
+    procedure edtImageSizeHeightEnter(Sender: TObject);
+    procedure edtImageSizeWidthEnter(Sender: TObject);
   private
     FCurrentDisplay: TLayout;
     FCurrentDB: TASSCGDBStores;
@@ -498,6 +500,16 @@ begin
   FCurrentStore.Enabled := cbStoreEnabled.IsChecked;
 
   InitListBoxItemFromStore(lbStores.selected, FCurrentStore);
+end;
+
+procedure TfrmMain.edtImageSizeHeightEnter(Sender: TObject);
+begin
+  edtImageSizeHeight.SelectAll;
+end;
+
+procedure TfrmMain.edtImageSizeWidthEnter(Sender: TObject);
+begin
+  edtImageSizeWidth.SelectAll;
 end;
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);

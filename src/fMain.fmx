@@ -445,7 +445,6 @@ object frmMain: TfrmMain
     Size.Width = 640.000000000000000000
     Size.Height = 430.000000000000000000
     Size.PlatformDefault = False
-    Visible = False
     TabOrder = 4
     object lImageSizesLeft: TLayout
       Align = Left
@@ -657,6 +656,7 @@ object frmMain: TfrmMain
           Size.Height = 22.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Width (px)'
+          OnEnter = edtImageSizeWidthEnter
         end
         object edtImageSizeHeight: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -671,6 +671,7 @@ object frmMain: TfrmMain
           Size.Height = 22.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Height (px)'
+          OnEnter = edtImageSizeHeightEnter
         end
       end
     end
@@ -680,6 +681,7 @@ object frmMain: TfrmMain
     Size.Width = 640.000000000000000000
     Size.Height = 430.000000000000000000
     Size.PlatformDefault = False
+    Visible = False
     TabOrder = 2
     object tbStoresFooter: TToolBar
       Align = Bottom
