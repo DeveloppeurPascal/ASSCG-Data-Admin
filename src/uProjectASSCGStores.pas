@@ -76,6 +76,7 @@ type
     FEnabled: boolean;
     FImageType: TASSCGDBImageType;
     FImageSizes: TASSCGDBImageSizes;
+    FFolderName: string;
     function GetAsJSON: TJSONObject; override;
     procedure SetAsJSON(const Value: TJSONObject); override;
     procedure SetEnabled(const Value: boolean);
@@ -83,6 +84,7 @@ type
     procedure SetImageType(const Value: TASSCGDBImageType);
     procedure SetisNeeded(const Value: boolean);
     procedure SetName(const Value: string);
+    procedure SetFolderName(const Value: string);
   protected
   public
     property Name: string read FName write SetName;
@@ -91,6 +93,7 @@ type
     property ImageSizes: TASSCGDBImageSizes read FImageSizes
       write SetImageSizes;
     property Enabled: boolean read FEnabled write SetEnabled;
+    property FolderName: string read FFolderName write SetFolderName;
     constructor Create; override;
     destructor Destroy; override;
   end;
@@ -109,16 +112,19 @@ type
     FName: string;
     FEnabled: boolean;
     FDevices: TASSCGDBDevices;
+    FFolderName: string;
     function GetAsJSON: TJSONObject; override;
     procedure SetAsJSON(const Value: TJSONObject); override;
     procedure SetDevices(const Value: TASSCGDBDevices);
     procedure SetEnabled(const Value: boolean);
     procedure SetName(const Value: string);
+    procedure SetFolderName(const Value: string);
   protected
   public
     property Name: string read FName write SetName;
     property Devices: TASSCGDBDevices read FDevices write SetDevices;
     property Enabled: boolean read FEnabled write SetEnabled;
+    property FolderName: string read FFolderName write SetFolderName;
     constructor Create; override;
     destructor Destroy; override;
   end;
@@ -219,6 +225,7 @@ begin
   FEnabled := true;
   FImageType := TASSCGDBImageType.JPG;
   FImageSizes := TASSCGDBImageSizes.Create;
+  FFolderName := '';
 end;
 
 destructor TASSCGDBDevice.Destroy;
@@ -231,7 +238,7 @@ function TASSCGDBDevice.GetAsJSON: TJSONObject;
 begin
   result := inherited.AddPair('l', FName).AddPair('n', FisNeeded)
     .AddPair('t', ord(FImageType)).AddPair('e', FEnabled)
-    .AddPair('s', FImageSizes.AsJSON);
+    .AddPair('s', FImageSizes.AsJSON).AddPair('f', FFolderName);
 end;
 
 procedure TASSCGDBDevice.SetAsJSON(const Value: TJSONObject);
@@ -259,11 +266,19 @@ begin
     FImageSizes.clear
   else
     FImageSizes.AsJSON := jsa;
+
+  if not Value.TryGetValue<string>('f', FFolderName) then
+    FFolderName := '';
 end;
 
 procedure TASSCGDBDevice.SetEnabled(const Value: boolean);
 begin
   FEnabled := Value;
+end;
+
+procedure TASSCGDBDevice.SetFolderName(const Value: string);
+begin
+  FFolderName := Value;
 end;
 
 procedure TASSCGDBDevice.SetImageSizes(const Value: TASSCGDBImageSizes);
@@ -314,6 +329,7 @@ begin
   FName := '';
   FEnabled := true;
   FDevices := TASSCGDBDevices.Create;
+  FFolderName := '';
 end;
 
 destructor TASSCGDBStore.Destroy;
@@ -325,7 +341,7 @@ end;
 function TASSCGDBStore.GetAsJSON: TJSONObject;
 begin
   result := inherited.AddPair('l', FName).AddPair('e', FEnabled)
-    .AddPair('d', FDevices.AsJSON);
+    .AddPair('d', FDevices.AsJSON).AddPair('f', FFolderName);
 end;
 
 procedure TASSCGDBStore.SetAsJSON(const Value: TJSONObject);
@@ -345,6 +361,9 @@ begin
     FDevices.clear
   else
     FDevices.AsJSON := jsa;
+
+  if not Value.TryGetValue<string>('f', FFolderName) then
+    FFolderName := '';
 end;
 
 procedure TASSCGDBStore.SetDevices(const Value: TASSCGDBDevices);
@@ -355,6 +374,11 @@ end;
 procedure TASSCGDBStore.SetEnabled(const Value: boolean);
 begin
   FEnabled := Value;
+end;
+
+procedure TASSCGDBStore.SetFolderName(const Value: string);
+begin
+  FFolderName := Value;
 end;
 
 procedure TASSCGDBStore.SetName(const Value: string);
@@ -520,8 +544,8 @@ end;
 
 procedure TASSCGDBObject.SetAsJSON(const Value: TJSONObject);
 begin
-//  if not Value.TryGetValue<string>('id', FId) then
-//    FId := '';
+  // if not Value.TryGetValue<string>('id', FId) then
+  // FId := '';
 end;
 
 procedure TASSCGDBObject.SetId(const Value: string);
