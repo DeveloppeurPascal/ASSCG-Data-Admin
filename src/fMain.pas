@@ -89,6 +89,8 @@ type
     edtImageSizeHeight: TEdit;
     lblFolderName: TLabel;
     edtDeviceFolderName: TEdit;
+    edtStoreFolderName: TEdit;
+    lblStoreFolderName: TLabel;
     procedure OlfAboutDialog1URLClick(const AURL: string);
     procedure FormCreate(Sender: TObject);
     procedure btnQuitterClick(Sender: TObject);
@@ -211,6 +213,7 @@ end;
 procedure TfrmMain.InitFieldsFromCurrentStore;
 begin
   edtStoreName.Text := FCurrentStore.Name;
+  edtStoreFolderName.Text := FCurrentStore.folderName;
   cbStoreEnabled.IsChecked := FCurrentStore.Enabled;
 end;
 
@@ -491,6 +494,7 @@ begin
     raise exception.Create('A store needs a name !');
 
   FCurrentStore.Name := edtStoreName.Text;
+  FCurrentStore.folderName := edtStoreFolderName.Text;
   FCurrentStore.Enabled := cbStoreEnabled.IsChecked;
 
   InitListBoxItemFromStore(lbStores.selected, FCurrentStore);
