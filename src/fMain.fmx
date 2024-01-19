@@ -24,8 +24,8 @@ object frmMain: TfrmMain
   end
   object OlfAboutDialog1: TOlfAboutDialog
     Titre = 'Stores DB admin for App Stores Screen Captures Generator'
-    VersionNumero = '1.0'
-    VersionDate = '20240118'
+    VersionNumero = '1.1'
+    VersionDate = '20240119'
     MultiResBitmap = <
       item
       end>
