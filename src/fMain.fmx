@@ -122,7 +122,6 @@ object frmMain: TfrmMain
     Size.Width = 640.000000000000000000
     Size.Height = 430.000000000000000000
     Size.PlatformDefault = False
-    Visible = False
     TabOrder = 3
     object lDevicesLeft: TLayout
       Align = Left
@@ -244,11 +243,11 @@ object frmMain: TfrmMain
       end
       object GridPanelLayout5: TGridPanelLayout
         Align = Top
-        Position.Y = 147.000000000000000000
+        Position.Y = 206.000000000000000000
         Size.Width = 330.000000000000000000
         Size.Height = 150.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 5
+        TabOrder = 7
         ColumnCollection = <
           item
             Value = 50.000000000000000000
@@ -413,6 +412,35 @@ object frmMain: TfrmMain
           Text = 'PNG'
         end
       end
+      object lblFolderName: TLabel
+        Align = Top
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 152.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Folder name'
+        TabOrder = 5
+      end
+      object edtDeviceFolderName: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        Align = Top
+        TabOrder = 6
+        Position.X = 5.000000000000000000
+        Position.Y = 179.000000000000000000
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+      end
     end
   end
   object lImageSizesScreen: TLayout
@@ -420,6 +448,7 @@ object frmMain: TfrmMain
     Size.Width = 640.000000000000000000
     Size.Height = 430.000000000000000000
     Size.PlatformDefault = False
+    Visible = False
     TabOrder = 4
     object lImageSizesLeft: TLayout
       Align = Left

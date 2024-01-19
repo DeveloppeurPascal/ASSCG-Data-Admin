@@ -87,6 +87,8 @@ type
     gplImageSizesWidthHeight: TGridPanelLayout;
     edtImageSizeWidth: TEdit;
     edtImageSizeHeight: TEdit;
+    lblFolderName: TLabel;
+    edtDeviceFolderName: TEdit;
     procedure OlfAboutDialog1URLClick(const AURL: string);
     procedure FormCreate(Sender: TObject);
     procedure btnQuitterClick(Sender: TObject);
@@ -185,6 +187,7 @@ end;
 procedure TfrmMain.InitFieldsFromCurrentDevice;
 begin
   edtDeviceName.Text := FCurrentDevice.Name;
+  edtDeviceFolderName.Text := FCurrentDevice.folderName;
   cbDeviceEnabled.IsChecked := FCurrentDevice.Enabled;
   case FCurrentDevice.ImageType of
     TASSCGDBImageType.JPG:
@@ -322,6 +325,7 @@ begin
     raise exception.Create('A device needs a name !');
 
   FCurrentDevice.Name := edtDeviceName.Text;
+  FCurrentDevice.folderName := edtDeviceFolderName.Text;
   FCurrentDevice.Enabled := cbDeviceEnabled.IsChecked;
   if rbDeviceImageTypeJPEG.IsChecked then
     FCurrentDevice.ImageType := TASSCGDBImageType.JPG
