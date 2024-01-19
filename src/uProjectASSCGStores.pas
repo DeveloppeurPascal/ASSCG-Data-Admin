@@ -27,13 +27,28 @@ const
 type
   TASSCGDBImageType = (JPG, PNG);
 
-  TASSCGDBImageSize = class
+  TASSCGDBObject = class
+  private
+    FId: string;
+    procedure SetId(const Value: string);
+    function GetId: string;
+  protected
+    function GetAsJSON: TJSONObject; virtual;
+    procedure SetAsJSON(const Value: TJSONObject); virtual;
+  public
+    property Id: string read GetId write SetId;
+    property AsJSON: TJSONObject read GetAsJSON write SetAsJSON;
+    constructor Create(AJSON: TJSONObject); overload;
+    constructor Create; overload; virtual;
+  end;
+
+  TASSCGDBImageSize = class(TASSCGDBObject)
   private
     FEnabled: boolean;
     FWidth: integer;
     FHeight: integer;
-    function GetAsJSON: TJSONObject;
-    procedure SetAsJSON(const Value: TJSONObject);
+    function GetAsJSON: TJSONObject; override;
+    procedure SetAsJSON(const Value: TJSONObject); override;
     procedure SetEnabled(const Value: boolean);
     procedure SetHeight(const Value: integer);
     procedure SetWidth(const Value: integer);
@@ -42,9 +57,7 @@ type
     property Width: integer read FWidth write SetWidth;
     property Height: integer read FHeight write SetHeight;
     property Enabled: boolean read FEnabled write SetEnabled;
-    property AsJSON: TJSONObject read GetAsJSON write SetAsJSON;
-    constructor Create(AJSON: TJSONObject); overload;
-    constructor Create; overload;
+    constructor Create; override;
   end;
 
   TASSCGDBImageSizes = class(TObjectList<TASSCGDBImageSize>)
@@ -56,15 +69,15 @@ type
     property AsJSON: TJSONArray read GetAsJSON write SetAsJSON;
   end;
 
-  TASSCGDBDevice = class
+  TASSCGDBDevice = class(TASSCGDBObject)
   private
     FisNeeded: boolean;
     FName: string;
     FEnabled: boolean;
     FImageType: TASSCGDBImageType;
     FImageSizes: TASSCGDBImageSizes;
-    function GetAsJSON: TJSONObject;
-    procedure SetAsJSON(const Value: TJSONObject);
+    function GetAsJSON: TJSONObject; override;
+    procedure SetAsJSON(const Value: TJSONObject); override;
     procedure SetEnabled(const Value: boolean);
     procedure SetImageSizes(const Value: TASSCGDBImageSizes);
     procedure SetImageType(const Value: TASSCGDBImageType);
@@ -78,9 +91,7 @@ type
     property ImageSizes: TASSCGDBImageSizes read FImageSizes
       write SetImageSizes;
     property Enabled: boolean read FEnabled write SetEnabled;
-    property AsJSON: TJSONObject read GetAsJSON write SetAsJSON;
-    constructor Create(AJSON: TJSONObject); overload;
-    constructor Create; overload;
+    constructor Create; override;
     destructor Destroy; override;
   end;
 
@@ -93,13 +104,13 @@ type
     property AsJSON: TJSONArray read GetAsJSON write SetAsJSON;
   end;
 
-  TASSCGDBStore = class
+  TASSCGDBStore = class(TASSCGDBObject)
   private
     FName: string;
     FEnabled: boolean;
     FDevices: TASSCGDBDevices;
-    function GetAsJSON: TJSONObject;
-    procedure SetAsJSON(const Value: TJSONObject);
+    function GetAsJSON: TJSONObject; override;
+    procedure SetAsJSON(const Value: TJSONObject); override;
     procedure SetDevices(const Value: TASSCGDBDevices);
     procedure SetEnabled(const Value: boolean);
     procedure SetName(const Value: string);
@@ -108,9 +119,7 @@ type
     property Name: string read FName write SetName;
     property Devices: TASSCGDBDevices read FDevices write SetDevices;
     property Enabled: boolean read FEnabled write SetEnabled;
-    property AsJSON: TJSONObject read GetAsJSON write SetAsJSON;
-    constructor Create(AJSON: TJSONObject); overload;
-    constructor Create; overload;
+    constructor Create; override;
     destructor Destroy; override;
   end;
 
@@ -137,15 +146,9 @@ uses
 
 { TASSCGDBImageSize }
 
-constructor TASSCGDBImageSize.Create(AJSON: TJSONObject);
-begin
-  Create;
-  AsJSON := AJSON;
-end;
-
 constructor TASSCGDBImageSize.Create;
 begin
-  inherited Create;
+  inherited;
   FEnabled := true;
   FWidth := 0;
   FHeight := 0;
@@ -153,16 +156,20 @@ end;
 
 function TASSCGDBImageSize.GetAsJSON: TJSONObject;
 begin
-  result := TJSONObject.Create.AddPair('w', FWidth).AddPair('h', FHeight)
+  result := inherited.AddPair('w', FWidth).AddPair('h', FHeight)
     .AddPair('e', FEnabled);
 end;
 
 procedure TASSCGDBImageSize.SetAsJSON(const Value: TJSONObject);
 begin
+  inherited;
+
   if not Value.TryGetValue<integer>('w', FWidth) then
     FWidth := 0;
+
   if not Value.TryGetValue<integer>('h', FHeight) then
     FHeight := 0;
+
   if not Value.TryGetValue<boolean>('e', FEnabled) then
     FEnabled := true;
 end;
@@ -204,15 +211,9 @@ end;
 
 { TASSCGDBDevice }
 
-constructor TASSCGDBDevice.Create(AJSON: TJSONObject);
-begin
-  Create;
-  AsJSON := AJSON;
-end;
-
 constructor TASSCGDBDevice.Create;
 begin
-  inherited Create;
+  inherited;
   FisNeeded := false;
   FName := '';
   FEnabled := true;
@@ -228,7 +229,7 @@ end;
 
 function TASSCGDBDevice.GetAsJSON: TJSONObject;
 begin
-  result := TJSONObject.Create.AddPair('l', FName).AddPair('n', FisNeeded)
+  result := inherited.AddPair('l', FName).AddPair('n', FisNeeded)
     .AddPair('t', ord(FImageType)).AddPair('e', FEnabled)
     .AddPair('s', FImageSizes.AsJSON);
 end;
@@ -238,6 +239,8 @@ var
   i: integer;
   jsa: TJSONArray;
 begin
+  inherited;
+
   if not Value.TryGetValue<string>('l', FName) then
     FName := '';
 
@@ -305,15 +308,9 @@ end;
 
 { TASSCGDBStore }
 
-constructor TASSCGDBStore.Create(AJSON: TJSONObject);
-begin
-  Create;
-  AsJSON := AJSON;
-end;
-
 constructor TASSCGDBStore.Create;
 begin
-  inherited Create;
+  inherited;
   FName := '';
   FEnabled := true;
   FDevices := TASSCGDBDevices.Create;
@@ -327,7 +324,7 @@ end;
 
 function TASSCGDBStore.GetAsJSON: TJSONObject;
 begin
-  result := TJSONObject.Create.AddPair('l', FName).AddPair('e', FEnabled)
+  result := inherited.AddPair('l', FName).AddPair('e', FEnabled)
     .AddPair('d', FDevices.AsJSON);
 end;
 
@@ -336,6 +333,8 @@ var
   i: integer;
   jsa: TJSONArray;
 begin
+  inherited;
+
   if not Value.TryGetValue<string>('l', FName) then
     FName := '';
 
@@ -478,6 +477,56 @@ begin
     end
   else
     raise exception.Create('Wrong JSON format.');
+end;
+
+{ TASSCGDBObject }
+
+constructor TASSCGDBObject.Create(AJSON: TJSONObject);
+begin
+  Create;
+  AsJSON := AJSON;
+end;
+
+constructor TASSCGDBObject.Create;
+begin
+  inherited;
+  FId := '';
+end;
+
+function TASSCGDBObject.GetAsJSON: TJSONObject;
+begin
+  result := TJSONObject.Create.AddPair('id', GetId);
+end;
+
+function TASSCGDBObject.GetId: string;
+var
+  i, n: byte;
+begin
+  if FId.isempty then
+    for i := 1 to 20 do
+    begin
+      n := random(62);
+      case n of
+        0 .. 9:
+          FId := FId + chr(ord('0') + n);
+        10 .. 35:
+          FId := FId + chr(ord('a') + n - 10);
+        36 .. 61:
+          FId := FId + chr(ord('A') + n - 36);
+      end;
+    end;
+  result := FId;
+end;
+
+procedure TASSCGDBObject.SetAsJSON(const Value: TJSONObject);
+begin
+//  if not Value.TryGetValue<string>('id', FId) then
+//    FId := '';
+end;
+
+procedure TASSCGDBObject.SetId(const Value: string);
+begin
+  FId := Value;
 end;
 
 initialization
