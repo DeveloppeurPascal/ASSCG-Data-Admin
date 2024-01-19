@@ -343,7 +343,7 @@ procedure TfrmMain.btnExportClick(Sender: TObject);
 var
   Folder, Filename: string;
 begin
-  // TODO : à remplaceer par une demande du dossier de stockage
+  // TODO : à remplacer par une demande du dossier de stockage
 {$IFDEF DEBUG}
 {$IFDEF MSWINDOWS}
   Folder := 'C:\xampp\htdocs\asscgdb';
