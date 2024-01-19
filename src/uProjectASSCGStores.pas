@@ -544,8 +544,8 @@ end;
 
 procedure TASSCGDBObject.SetAsJSON(const Value: TJSONObject);
 begin
-  // if not Value.TryGetValue<string>('id', FId) then
-  // FId := '';
+  if not Value.TryGetValue<string>('id', FId) then
+    FId := '';
 end;
 
 procedure TASSCGDBObject.SetId(const Value: string);
