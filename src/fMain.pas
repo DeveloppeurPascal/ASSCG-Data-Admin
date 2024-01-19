@@ -622,6 +622,7 @@ begin
     FCurrentDevice := lbDevices.selected.TagObject as TASSCGDBDevice;
     InitFieldsFromCurrentDevice;
     lDevicesRight.Visible := true;
+    edtDeviceName.SetFocus;
   end
   else
     lDevicesRight.Visible := false;
@@ -634,6 +635,7 @@ begin
     FCurrentImageSize := lbImageSizes.selected.TagObject as TASSCGDBImageSize;
     InitFieldsFromCurrentImageSize;
     lImageSizesRight.Visible := true;
+    edtImageSizeWidth.SetFocus;
   end
   else
     lImageSizesRight.Visible := false;
@@ -646,6 +648,7 @@ begin
     FCurrentStore := lbStores.selected.TagObject as TASSCGDBStore;
     InitFieldsFromCurrentStore;
     lStoresRight.Visible := true;
+    edtStoreName.SetFocus;
   end
   else
     lStoresRight.Visible := false;
