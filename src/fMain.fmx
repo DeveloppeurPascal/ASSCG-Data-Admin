@@ -133,11 +133,10 @@ object frmMain: TfrmMain
       object lbDevices: TListBox
         Align = Client
         Margins.Left = 5.000000000000000000
-        Margins.Top = 5.000000000000000000
         Margins.Right = 5.000000000000000000
         Margins.Bottom = 5.000000000000000000
         Size.Width = 290.000000000000000000
-        Size.Height = 370.000000000000000000
+        Size.Height = 353.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         DisableFocusEffect = True
@@ -146,7 +145,7 @@ object frmMain: TfrmMain
         DefaultItemStyles.GroupFooterStyle = ''
         OnChange = lbDevicesChange
         Viewport.Width = 286.000000000000000000
-        Viewport.Height = 366.000000000000000000
+        Viewport.Height = 349.000000000000000000
       end
       object GridPanelLayout2: TGridPanelLayout
         Align = Bottom
@@ -186,6 +185,21 @@ object frmMain: TfrmMain
           TextSettings.Trimming = None
           OnClick = btnDeviceAddClick
         end
+      end
+      object lblDevices: TLabel
+        Align = Top
+        FocusControl = lbDevices
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Devices'
+        TabOrder = 2
       end
     end
     object lDevicesRight: TLayout
@@ -455,11 +469,10 @@ object frmMain: TfrmMain
       object lbImageSizes: TListBox
         Align = Client
         Margins.Left = 5.000000000000000000
-        Margins.Top = 5.000000000000000000
         Margins.Right = 5.000000000000000000
         Margins.Bottom = 5.000000000000000000
         Size.Width = 290.000000000000000000
-        Size.Height = 370.000000000000000000
+        Size.Height = 353.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         DisableFocusEffect = True
@@ -468,7 +481,7 @@ object frmMain: TfrmMain
         DefaultItemStyles.GroupFooterStyle = ''
         OnChange = lbImageSizesChange
         Viewport.Width = 286.000000000000000000
-        Viewport.Height = 366.000000000000000000
+        Viewport.Height = 349.000000000000000000
       end
       object GridPanelLayout3: TGridPanelLayout
         Align = Bottom
@@ -508,6 +521,21 @@ object frmMain: TfrmMain
           TextSettings.Trimming = None
           OnClick = btnImageSizeAddClick
         end
+      end
+      object lblImagesizes: TLabel
+        Align = Top
+        FocusControl = lbImageSizes
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Image sizes'
+        TabOrder = 2
       end
     end
     object lImageSizesRight: TLayout
@@ -754,11 +782,10 @@ object frmMain: TfrmMain
       object lbStores: TListBox
         Align = Client
         Margins.Left = 5.000000000000000000
-        Margins.Top = 5.000000000000000000
         Margins.Right = 5.000000000000000000
         Margins.Bottom = 5.000000000000000000
         Size.Width = 290.000000000000000000
-        Size.Height = 320.000000000000000000
+        Size.Height = 303.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         DisableFocusEffect = True
@@ -767,7 +794,7 @@ object frmMain: TfrmMain
         DefaultItemStyles.GroupFooterStyle = ''
         OnChange = lbStoresChange
         Viewport.Width = 286.000000000000000000
-        Viewport.Height = 316.000000000000000000
+        Viewport.Height = 299.000000000000000000
       end
       object gplStores: TGridPanelLayout
         Align = Bottom
@@ -807,6 +834,21 @@ object frmMain: TfrmMain
           TextSettings.Trimming = None
           OnClick = btnStoreAddClick
         end
+      end
+      object lblStores: TLabel
+        Align = Top
+        FocusControl = lbStores
+        Margins.Left = 5.000000000000000000
+        Margins.Top = 5.000000000000000000
+        Margins.Right = 5.000000000000000000
+        Position.X = 5.000000000000000000
+        Position.Y = 5.000000000000000000
+        Size.Width = 290.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Trimming = None
+        Text = 'Stores'
+        TabOrder = 2
       end
     end
     object lStoresRight: TLayout

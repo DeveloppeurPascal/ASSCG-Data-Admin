@@ -91,6 +91,9 @@ type
     edtDeviceFolderName: TEdit;
     edtStoreFolderName: TEdit;
     lblStoreFolderName: TLabel;
+    lblDevices: TLabel;
+    lblImagesizes: TLabel;
+    lblStores: TLabel;
     procedure OlfAboutDialog1URLClick(const AURL: string);
     procedure FormCreate(Sender: TObject);
     procedure btnQuitterClick(Sender: TObject);
