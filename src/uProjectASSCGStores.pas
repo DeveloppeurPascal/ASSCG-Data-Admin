@@ -47,12 +47,12 @@ type
     FEnabled: boolean;
     FWidth: integer;
     FHeight: integer;
-    function GetAsJSON: TJSONObject; override;
-    procedure SetAsJSON(const Value: TJSONObject); override;
     procedure SetEnabled(const Value: boolean);
     procedure SetHeight(const Value: integer);
     procedure SetWidth(const Value: integer);
   protected
+    function GetAsJSON: TJSONObject; override;
+    procedure SetAsJSON(const Value: TJSONObject); override;
   public
     property Width: integer read FWidth write SetWidth;
     property Height: integer read FHeight write SetHeight;
@@ -77,8 +77,6 @@ type
     FImageType: TASSCGDBImageType;
     FImageSizes: TASSCGDBImageSizes;
     FFolderName: string;
-    function GetAsJSON: TJSONObject; override;
-    procedure SetAsJSON(const Value: TJSONObject); override;
     procedure SetEnabled(const Value: boolean);
     procedure SetImageSizes(const Value: TASSCGDBImageSizes);
     procedure SetImageType(const Value: TASSCGDBImageType);
@@ -86,6 +84,8 @@ type
     procedure SetName(const Value: string);
     procedure SetFolderName(const Value: string);
   protected
+    function GetAsJSON: TJSONObject; override;
+    procedure SetAsJSON(const Value: TJSONObject); override;
   public
     property Name: string read FName write SetName;
     property ImageType: TASSCGDBImageType read FImageType write SetImageType;
@@ -113,13 +113,13 @@ type
     FEnabled: boolean;
     FDevices: TASSCGDBDevices;
     FFolderName: string;
-    function GetAsJSON: TJSONObject; override;
-    procedure SetAsJSON(const Value: TJSONObject); override;
     procedure SetDevices(const Value: TASSCGDBDevices);
     procedure SetEnabled(const Value: boolean);
     procedure SetName(const Value: string);
     procedure SetFolderName(const Value: string);
   protected
+    function GetAsJSON: TJSONObject; override;
+    procedure SetAsJSON(const Value: TJSONObject); override;
   public
     property Name: string read FName write SetName;
     property Devices: TASSCGDBDevices read FDevices write SetDevices;
@@ -346,7 +346,6 @@ end;
 
 procedure TASSCGDBStore.SetAsJSON(const Value: TJSONObject);
 var
-  i: integer;
   jsa: TJSONArray;
 begin
   inherited;
